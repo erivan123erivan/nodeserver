@@ -44,7 +44,7 @@ app.post("/transfer", async (req, res) => {
       amount: Math.round(totalPrice * 100), // Convert totalPrice to the lowest currency unit (e.g., cents)
       currency: "eur",
       payment_method_types: ["card"],
-      metadata: { name, carName, pickupDate, returnDate }, // Include additional data in the metadata
+      metadata: { name, pickupDate, returnDate }, // Include additional data in the metadata
     });
 
     const clientSecret = paymentIntent.client_secret;
