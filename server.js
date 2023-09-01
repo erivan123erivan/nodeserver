@@ -35,8 +35,8 @@ app.post("/pay", async (req, res) => {
 
 app.post("/transfer", async (req, res) => {
   try {
-    const { name, totalPrice, pickupDate, returnDate } = req.body; // Extract additional data from the request body
-    if (!name || !totalPrice || !pickupDate || !returnDate) {
+    const { name, totalPrice, selectedStartDate, selectedEndDate} = req.body; // Extract additional data from the request body
+    if (!name || !totalPrice || !selectedStartDate || !selectedEndDate) {
       return res.status(400).json({ message: "Please provide all required data" });
     }
 
@@ -44,7 +44,7 @@ app.post("/transfer", async (req, res) => {
       amount: Math.round(totalPrice * 100), // Convert totalPrice to the lowest currency unit (e.g., cents)
       currency: "eur",
       payment_method_types: ["card"],
-      metadata: { name, pickupDate, returnDate }, // Include additional data in the metadata
+      metadata: { name, selectedStartDate, selectedEndDate }, // Include additional data in the metadata
     });
 
     const clientSecret = paymentIntent.client_secret;
